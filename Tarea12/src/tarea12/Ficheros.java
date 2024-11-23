@@ -16,23 +16,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Ficheros {
 	private static Scanner sc = new Scanner(System.in);
 
-	protected void guardarEnFichero() {
-		List<Alumno> alumnos = new GuardarBBDD().obtenerAlumnosBBDD();
-		ObjectOutputStream ois = null;
+	protected void guardarAlumnosEnFichero() {
+		List<Alumno> alumnos = new OperacionesBBDD().obtenerAlumnosBBDD();
+		ObjectOutputStream oos = null;
 		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream("ficheroAlumnos.dat");
-			ois = new ObjectOutputStream(fos);
+			oos = new ObjectOutputStream(fos);
 			for (Alumno alumno : alumnos) {
-				ois.writeObject(alumno);
+				oos.writeObject(alumno);
 			}
 			System.out.println("Alumnos guardados en fichero correctamente");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (ois != null) {
+			if (oos != null) {
 				try {
-					ois.close();
+					oos.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -40,7 +40,7 @@ public class Ficheros {
 		}
 	}
 
-	protected void leerDeFichero() {
+	protected void leerAlumnosDeFichero() {
 		System.out.println("Dime el la ruta del fichero binario");
 		String ruta = sc.nextLine();
 		FileInputStream fis;
@@ -52,7 +52,7 @@ public class Ficheros {
 			try {
 				while (fis.available() > 0) {
 					Alumno alumno = (Alumno) ois.readObject();
-					new GuardarBBDD().insertarEnBBDD(alumno);
+					new OperacionesBBDD().insertarAlumnoEnBBDD(alumno);
 				}
 			} finally {
 				ois.close();
@@ -63,34 +63,35 @@ public class Ficheros {
 		}
 	}
 
-	protected void guardarEnFicheroJSON() {
-		List<Alumno> alumnos = new GuardarBBDD().obtenerAlumnosBBDD();
-		ObjectMapper objectMapper = new ObjectMapper();
-		File archivo = new File("ficheroAlumnos.json");
+	protected void guardarGruposEnFicheroJSON() {
+	    List<Grupo> grupos = new OperacionesBBDD().obtenerGruposConAlumnos();
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    File archivo = new File("FicheroGrupos.json");
 
-		try {
-			objectMapper.writeValue(archivo, alumnos);
-			System.out.println("Datos escritos");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	    try {
+	        objectMapper.writeValue(archivo, grupos);
+	        System.out.println("Datos escritos");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
-
-	protected void leerDeFicheroJSON() {
-		System.out.println("Dime la ruta del fichero JSON");
+	
+	protected void leerGrupoDeFicheroJSON() {
+		System.out.println("Introduce la ruta del archivo JSON:");
 		String ruta = sc.nextLine();
-		ArrayList<Alumno> alumnos = new ArrayList<>();
+		List<Grupo> grupos;
 		ObjectMapper objectMapper = new ObjectMapper();
 		File archivo = new File(ruta);
 
 		try {
-			alumnos = objectMapper.readValue(archivo, new TypeReference<ArrayList<Alumno>>() {
+			grupos = objectMapper.readValue(archivo, new TypeReference<List<Grupo>>() {
 			});
-			for (Alumno alumno : alumnos) {
-				new GuardarBBDD().insertarEnBBDD(alumno);
+			for (Grupo grupo : grupos) {
+				new OperacionesBBDD().insertarGrupoEnBBDD(grupo);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+
 }

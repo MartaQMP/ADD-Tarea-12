@@ -5,16 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Alumno implements Serializable{
-		int nia;
-		String nombre, apellidos, ciclo, curso, grupo;
-		char genero;
+		int nia, grupo;
+		String nombre, apellidos, ciclo, curso;
+		Character genero;
 		Date fecNac;
 		
 		
 		//Constructor
 		public Alumno() {}
 		
-		public Alumno(int nia, String nombre, String apellidos, String ciclo, String curso, String grupo, Character gen,
+		public Alumno(int nia, String nombre, String apellidos, String ciclo, String curso, int grupo, Character gen,
 				Date fecNac) {
 			this.nia = nia;
 			this.nombre = nombre;
@@ -58,16 +58,16 @@ public class Alumno implements Serializable{
 		public void setCurso(String curso) {
 			this.curso = curso;
 		}
-		public String getGrupo() {
+		public int getGrupo() {
 			return grupo;
 		}
-		public void setGrupo(String grupo) {
+		public void setGrupo(int grupo) {
 			this.grupo = grupo;
 		}
-		public char getGenero() {
+		public Character getGenero() {
 			return genero;
 		}
-		public void setGenero(char gen) {
+		public void setGenero(Character gen) {
 			this.genero = gen;
 		}
 		public Date getFecNac() {

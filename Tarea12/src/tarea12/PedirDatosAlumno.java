@@ -13,11 +13,11 @@ public class PedirDatosAlumno {
 		int nia = pedirNia();
 		String nombre = pedirNombre();
 		String apellidos = pedirApellidos();
-		char genero = pedirGenero();
+		Character genero = pedirGenero();
 		Date fecha = pedirFecNac();
 		String ciclo = pedirCiclo();
 		String curso = pedirCurso();
-		String grupo = pedirGrupo();
+		int grupo = pedirGrupo();
 
 		Alumno alumno = new Alumno(nia, nombre, apellidos, ciclo, curso, grupo, genero, fecha);
 		return alumno;
@@ -47,14 +47,14 @@ public class PedirDatosAlumno {
 		return sc.nextLine();
 	}
 
-	protected char pedirGenero() {
+	protected Character pedirGenero() {
 		System.out.println("Dime el genero. M o H");
 		String palabra = sc.next();
 		while (!palabra.equalsIgnoreCase("M") && !palabra.equalsIgnoreCase("H")) {
 			System.out.println("Genero no valido. Introduce M o H:");
 			palabra = sc.next();
 		}
-		char g = palabra.charAt(0);
+		Character g = palabra.charAt(0);
 		return g;
 	}
 
@@ -92,9 +92,11 @@ public class PedirDatosAlumno {
 		return sc.next();
 	}
 
-	protected String pedirGrupo() {
+	protected int pedirGrupo() {
 		System.out.println("Dime el grupo");
-		return sc.next();
+		int g = sc.nextInt();
+		sc.nextLine();
+		return g;
 	}
 
 }
