@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class OperacionesBBDD {
 	static Scanner sc = new Scanner(System.in);
-	static String direccionBBDD = "jdbc:mysql://localhost:3306/Alumnos";
+	static String direccionBBDD = "jdbc:mysql://localhost:3306/Alumnos14";
 	static String usuario = "root";
 	static String contraseña = "Admin-3015_MQM-P";
 

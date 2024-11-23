@@ -1,5 +1,10 @@
 CREATE DATABASE Alumnos14;
 USE Alumnos14;
+CREATE TABLE Grupos (
+    Id INT PRIMARY KEY,
+    Nombre VARCHAR(50),
+    Aula VARCHAR(50)
+);
 CREATE TABLE Alumno(
 	Nia INT PRIMARY KEY,
 	Nombre VARCHAR(50),
@@ -11,9 +16,5 @@ CREATE TABLE Alumno(
 	Grupo INT,
 	FOREIGN KEY (Grupo) REFERENCES Grupos(IGrupo)
 );
-CREATE TABLE Grupos (
-    Id INT PRIMARY KEY,
-    Nombre VARCHAR(50),
-    Aula VARCHAR(50)
-);
+
 
